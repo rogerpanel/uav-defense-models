@@ -1,0 +1,17 @@
+{
+  "clean_acc": 1.0,
+  "fgsm_acc_eps_0.0078": 1.0,
+  "fgsm_acc_eps_0.0157": 1.0,
+  "fgsm_acc_eps_0.0313": 1.0,
+  "pgd_acc_eps_0.0078": 1.0,
+  "pgd_acc_eps_0.0157": 1.0,
+  "pgd_acc_eps_0.0313": 1.0,
+  "cw_acc_kappa_0": 0.43137254901960786,
+  "cw_acc_kappa_5": 0.0,
+  "hsj_acc": 0.875,
+  "boundary_acc": 0.96875,
+  "smoothed_mean_radius": 0.44431201878119275,
+  "smoothed_abstain_rate": 0.0,
+  "L_g": 1.0131993293762207,
+  "gronwall_input_radius": 0.1815277925620829
+}

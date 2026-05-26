@@ -1,0 +1,45 @@
+run_name: texbat_ctgnn
+seed: 0
+
+data:
+  source: texbat              # one of: texbat | synth
+  root: data/texbat
+  scenarios: [1, 2, 3, 7]
+  max_windows_per_scenario: 4000
+  win_ms: 1.0
+  hop_ms: 1.0
+  n_sats: 8
+
+model:
+  kind: ct_tgnn               # one of: ct_tgnn | caf_cnn | s2s_transformer
+  hidden: 32
+  t_span: [0.0, 1.0]
+  method: rk4
+
+train:
+  epochs: 5
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-5
+  adv_train:
+    enable: true
+    method: pgd               # warm-start with fgsm, inner pgd
+    eps: 0.03125              # 8/255 in [-1,1]
+    alpha: 0.0078125          # 2/255
+    steps: 7
+
+eval:
+  attacks:
+    fgsm:    {eps: [0.0078, 0.0157, 0.0313]}
+    pgd:     {eps: [0.0078, 0.0157, 0.0313], steps: 20, restarts: 1}
+    cw:      {kappa: [0, 5], steps: 200}
+    hsj:     {max_queries: 1000, B: 50}
+    boundary: {steps: 500}
+  smoothing:
+    sigma: 0.25
+    n0: 100
+    n: 1000
+    alpha: 1.0e-3
+  lipschitz:
+    horizon_T: 1.0
+    eps_out: 0.5
